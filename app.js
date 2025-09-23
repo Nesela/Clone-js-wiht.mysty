@@ -1,19 +1,13 @@
-let age;
+// const loginForm = document.querySelector(".login-from");
+// const loginInput = loginForm.querySelector("input");
+// const loginButton = loginForm.querySelector("button");
 
-do{ 
-    age= parseInt(prompt("몇 살인가?"));
-if(isNaN(age)){
-    alert("숫자만 입력해주세요");
-}
+const loginForm = document.querySelector(".login-form");
+const loginInput = document.querySelector(".login-form input");
+
+function onLoginSubmit(event) {
+    event.preventDefault();
+    console.log(loginInput.value);
 }
 
-while(isNaN(age));
-if(age < 18){
-    console.log("미성년자입니다");
-}
-else if(age >= 18 && age <= 60){
-    console.log("성인입니다.");
-}
-else if(age >= 61){
-    console.log("노년입니다.");
-}
+loginForm.addEventListener("submit", onLoginSubmit);
