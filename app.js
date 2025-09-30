@@ -6,15 +6,27 @@ const loginForm = document.querySelector("#login-form");
 const loginInput = document.querySelector("#login-form input");
 const greeting = document.querySelector("#greeting");
 
-const HIDDEN_CLASSNAME = "hidden";
+const HIDDEN_CLASSNAME = "hidden"; //반복되는 스트링을 변수값으로 고정
+const USERNAME_KEY = "username";
 
 function onLoginSubmit(event) {
     event.preventDefault(); //기본동작 막기
     loginForm.classList.add(HIDDEN_CLASSNAME);  // form에 hidden 클래스를 추가하기
     const username =loginInput.value;  //LoginInput에 value값을 유저네임으로 기입
-    localStorage.setItem("username", username);
-    greeting.innerText = `Hello ${username}`; // greeting 에 텍스트를 "Hello 유저네임" 으로 설정
-    greeting.classList.remove(HIDDEN_CLASSNAME); // greeting 에서 hidden 클래스를 제거
+    localStorage.setItem(USERNAME_KEY, username);
+    paintGreetings(username);
 }
 
-loginForm.addEventListener("submit", onLoginSubmit);
+function paintGreetings(username){
+    greeting.innerText = `Hello ${username}`;
+    greeting.classList.remove(HIDDEN_CLASSNAME); 
+}
+
+const savedUsername = localStorage.getItem(USERNAME_KEY);
+
+if(savedUsername === null ){
+    loginForm.classList.remove(HIDDEN_CLASSNAME);
+    loginForm.addEventListener("submit", onLoginSubmit);
+} else{
+    paintGreetings(savedUsername)
+}
