@@ -12,4 +12,4 @@ getClock(); //새로고침시 시간 바로 불러오기
 setInterval(getClock, 1000); // 1초마다 시간 불러오기
 
 //interval = 매번 일어나야 하는 무언가!
-//setInterval(실행할 함수, 실행할 함수의 주기)!
+//setInterval(실행할 함수, 실행할 함수의 주기)
