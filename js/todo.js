@@ -12,13 +12,15 @@ function saveToDos(){
 
 function deleteToDo(event){
     const li = event.target.parentElement;
+    console.log(li.id);
     li.remove();
 }
 
 function paintTodo(newTodo){
     const li = document.createElement("li");
+    li.id = newTodo.id;
     const span = document.createElement("span");
-    span.innerText = newTodo;
+    span.innerText = newTodo.text;
     const button = document.createElement("button");
     button.innerText = "❌";
     button.addEventListener("click", deleteToDo)
@@ -31,8 +33,12 @@ function handleToDoSubmit(event){
     event.preventDefault();
     const newTodo = toDoInput.value;  // input의 현재 value를 새로운변수에 복사
     toDoInput.value = "";
-    toDos.push(newTodo);
-    paintTodo(newTodo);
+    const newTodoObj = {
+        text: newTodo,
+        id: Date.now(),
+    };
+    toDos.push(newTodoObj);
+    paintTodo(newTodoObj);
     saveToDos();
 }
 
@@ -40,12 +46,14 @@ toDoForm.addEventListener("submit", handleToDoSubmit);
 
 const savedToDos = localStorage.getItem(TODOS_KEY);
 
-if(saveToDos !== null){
+if(savedToDos !== null){
     const parsedToDos = JSON.parse(savedToDos); //localstorage에 있는 string을  js object로 변환
-    toDos = parsedToDos
-    parsedToDos.forEach(paintTodo)  // 
+    toDos = parsedToDos;
+    parsedToDos.forEach(paintTodo);  //forEach함수는 function을 array배열의 요소마다 실행
 }
 
+function Filter(){
+    
+} 
 
-
-
+[1, 2, 3, 4].filter(Filter)
